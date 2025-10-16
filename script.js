@@ -1,3 +1,4 @@
+// Holidays with themes for animations
 const holidays = [
   {name: "New Year's Day", month:1, day:1, theme:"newyear", desc:"Celebrate the start of a new year!"},
   {name: "Valentine's Day", month:2, day:14, theme:"valentine", desc:"A day for love and friendship."},
@@ -31,6 +32,7 @@ const popupDate = document.getElementById("popupDate");
 const popupCountdown = document.getElementById("popupCountdown");
 const popupDesc = document.getElementById("popupDescription");
 const search = document.getElementById("search");
+const toggleThemeBtn = document.getElementById("toggleTheme");
 
 function getNextDate(h) {
   const now = new Date();
@@ -51,12 +53,12 @@ function formatCountdown(ms) {
 function renderDashboard() {
   dashboard.innerHTML = "";
   const now = new Date();
-  let filtered = holidays.filter(h => h.name.toLowerCase().includes(search.value.toLowerCase()));
+  let filtered = holidays.filter(h=>h.name.toLowerCase().includes(search.value.toLowerCase()));
   filtered.sort((a,b)=> getNextDate(a)-getNextDate(b));
-
+  
   filtered.forEach(h=>{
     const next = getNextDate(h);
-    const diff = next - now;
+    const diff = next-now;
     const card = document.createElement("div");
     card.className="card";
     card.innerHTML = `<h3>${h.name}</h3><p>${formatCountdown(diff)}</p>`;
@@ -66,6 +68,7 @@ function renderDashboard() {
 }
 
 function openPopup(h) {
+  if (!h) return;
   popup.classList.remove("hidden");
   popupTitle.textContent = h.name;
   popupDate.textContent = "Date: " + getNextDate(h).toDateString();
@@ -77,6 +80,7 @@ function openPopup(h) {
 closePopup.onclick = ()=>popup.classList.add("hidden");
 window.onclick = e=>{if(e.target==popup) popup.classList.add("hidden");};
 search.oninput = renderDashboard;
+toggleThemeBtn.onclick = ()=>document.body.classList.toggle("dark");
 
 renderDashboard();
 setInterval(renderDashboard,1000);
