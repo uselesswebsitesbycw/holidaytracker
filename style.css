@@ -5,6 +5,13 @@ body {
   font-family: 'Poppins', sans-serif;
   background: linear-gradient(135deg, #f0f4ff, #dbe7f7);
   color: #333;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* Dark theme */
+body.dark {
+  background: linear-gradient(135deg, #1b1b2f, #2c2c44);
+  color: #f0f0f0;
 }
 
 header {
@@ -15,20 +22,9 @@ header {
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-header h1 {
-  margin: 0;
-  font-size: 2em;
-}
-
-#search {
-  margin-top: 1em;
-  padding: 0.7em;
-  width: 70%;
-  max-width: 400px;
-  border-radius: 12px;
-  border: none;
-  font-size: 1em;
-}
+header h1 { margin:0; font-size:2em; }
+#search { margin-top:1em; padding:0.7em; width:60%; max-width:350px; border-radius:12px; border:none; font-size:1em; }
+#toggleTheme { margin-left:10px; padding:0.5em 1em; border:none; border-radius:10px; cursor:pointer; background:#ff9800; color:white; font-weight:bold; }
 
 #dashboard {
   display: grid;
@@ -46,67 +42,62 @@ header h1 {
   box-shadow: 0 6px 20px rgba(0,0,0,0.1);
   text-align: center;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
 }
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.2);
 }
 
-.card h3 {
-  margin: 0 0 0.5em 0;
-}
-
-.card p {
-  margin: 0;
-  font-size: 0.9em;
-  color: #555;
-}
+.card h3 { margin:0 0 0.5em 0; }
+.card p { margin:0; font-size:0.9em; color:#555; }
 
 /* Popup */
-.hidden { display: none; }
+.hidden { display:none; }
 #holidayPopup {
   position: fixed;
-  inset: 0;
+  inset:0;
   background: rgba(0,0,0,0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 100;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:100;
+  overflow:auto;
+  padding:2em;
 }
 .popup-content {
-  background: white;
-  border-radius: 20px;
-  padding: 2em;
-  max-width: 600px;
-  width: 90%;
-  text-align: center;
-  position: relative;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  background:white;
+  border-radius:20px;
+  padding:2em;
+  max-width:600px;
+  width:100%;
+  text-align:center;
+  position:relative;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
   animation: fadeIn 0.3s ease-out;
 }
-@keyframes fadeIn {
-  from {opacity:0; transform: translateY(-20px);}
-  to {opacity:1; transform: translateY(0);}
-}
+.popup-content canvas { position:absolute; top:0; left:0; width:100%; height:100%; border-radius:20px; pointer-events:none; z-index:-1; }
+
+@keyframes fadeIn { from {opacity:0; transform: translateY(-20px);} to {opacity:1; transform: translateY(0);} }
 
 #closePopup {
-  position: absolute;
-  top: 1em;
-  right: 1em;
-  background: #ff6b6b;
-  border: none;
-  color: white;
-  font-size: 1.5em;
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  cursor: pointer;
+  position:absolute;
+  top:1em;
+  right:1em;
+  background:#ff6b6b;
+  border:none;
+  color:white;
+  font-size:1.5em;
+  border-radius:50%;
+  width:35px; height:35px;
+  cursor:pointer;
 }
-#closePopup:hover { background: #ff4c4c; }
+#closePopup:hover { background:#ff4c4c; }
 
-#popupTitle { font-size: 1.8em; margin-bottom: 0.5em; }
-#popupCountdown { font-size: 1.4em; margin: 1em 0; font-weight: bold; }
+#popupTitle { font-size:1.8em; margin-bottom:0.5em; }
+#popupCountdown { font-size:1.4em; margin:1em 0; font-weight:bold; }
+.popup-content p { margin:0.5em 0; }
 
 /* Themed popup backgrounds */
 .popup-content.theme-newyear { background: linear-gradient(135deg, #212121, #fbc02d); color:white;}
