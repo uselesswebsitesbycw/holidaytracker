@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Holiday Countdown Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>🎉 Holiday Countdown Dashboard</h1>
+  <input type="text" id="search" placeholder="Search holidays...">
+</header>
+
+<main>
+  <div id="dashboard"></div>
+</main>
+
+<div id="holidayPopup" class="hidden">
+  <div class="popup-content">
+    <button id="closePopup">×</button>
+    <h2 id="popupTitle"></h2>
+    <p id="popupDate"></p>
+    <div id="popupCountdown"></div>
+    <p id="popupDescription"></p>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
